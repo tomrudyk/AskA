@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Ask A</string>
+
+    <string-array name="States">
+        <item>Israel</item>
+        <item>Congo</item>
+        <item>Germany</item>
+        <item>Poland</item>
+        <item>America</item>
+        <item>Russia</item>
+        <item>China</item>
+        <item>Japan</item>
+        <item>France</item>
+        <item>Mexico</item>
+        <item>Italy</item>
+        <item>Australia</item>
+        <item>Canada</item>
+
+    </string-array>
+    <string-array name="ForbiddenLanguage">
+        <item>fuck</item>
+        <item>Suck</item>
+        <item>dick</item>
+        <item>pussy</item>
+        <item>idiot</item>
+        <item>stupid</item>
+        <item>moron</item>
+        <item>motherfucker</item>
+        <item>assholes</item>
+        <item>motherfucker</item>
+        <item>motherfucker</item>
+    </string-array>
+</resources>

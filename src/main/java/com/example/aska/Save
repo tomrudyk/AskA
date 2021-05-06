@@ -1,0 +1,1 @@
+Toast.makeText(MainActivity2.this, "You Already Sent 5 Q", Toast.LENGTH_SHORT).show();

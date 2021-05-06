@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyInfo"
+    android:background="@drawable/ic_bgcolor">
+
+    <TextView
+        android:id="@+id/cashView"
+        android:layout_width="151dp"
+        android:layout_height="47dp"
+        android:text="cashView"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reSendBtn" />
+
+    <TextView
+        android:id="@+id/UserQ"
+        android:layout_width="390dp"
+        android:layout_height="168dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LocationOfQtxt"
+        app:layout_constraintVertical_bias="0.025" />
+
+    <TextView
+        android:id="@+id/LocationOfQtxt"
+        android:layout_width="202dp"
+        android:layout_height="56dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Qnumber"
+        app:layout_constraintVertical_bias="0.026" />
+
+    <TextView
+        android:id="@+id/Qnumber"
+        android:layout_width="202dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/UserA"
+        android:layout_width="390dp"
+        android:layout_height="168dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserQ"
+        app:layout_constraintVertical_bias="0.031" />
+
+    <Button
+        android:id="@+id/nextBtn"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        android:text="next Q"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserA" />
+
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:text="Previous Q"
+        app:layout_constraintEnd_toStartOf="@+id/nextBtn"
+        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserA" />
+
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Delete Q"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nextBtn"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/reSendBtn"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="reSend Q"
+        app:layout_constraintEnd_toStartOf="@+id/deleteBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nextBtn" />
+
+    <Button
+        android:id="@+id/ReportAns"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:text="report A"
+        app:layout_constraintEnd_toStartOf="@+id/reSendBtn"
+        app:layout_constraintTop_toBottomOf="@+id/nextBtn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
