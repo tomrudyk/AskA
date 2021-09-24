@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditUserInfo"
+    android:background="@drawable/ic_bgcolor">
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/HobbyInfoEdit"
+        android:layout_width="235dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toEndOf="@+id/textViewHobby"
+        app:layout_constraintTop_toBottomOf="@+id/CurLocation" />
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/HobbyInfoEdit2"
+        android:layout_width="235dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/textViewHobby"
+        app:layout_constraintTop_toBottomOf="@+id/HobbyInfoEdit" />
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/HobbyInfoEdit3"
+        android:layout_width="235dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/textViewHobby3"
+        app:layout_constraintTop_toBottomOf="@+id/HobbyInfoEdit2" />
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/ProfessionInfoEdit"
+        android:layout_width="235dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.833"
+        app:layout_constraintStart_toEndOf="@+id/textViewProfession"
+        app:layout_constraintTop_toBottomOf="@+id/HobbyInfoEdit3" />
+
+    <TextView
+        android:id="@+id/textViewHobby"
+        android:layout_width="138dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Choose first Hobby"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CurLocation" />
+
+    <TextView
+        android:id="@+id/textViewHobby2"
+        android:layout_width="138dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Choose secound Hobby"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHobby" />
+
+
+    <TextView
+        android:id="@+id/textViewHobby3"
+        android:layout_width="138dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Choose secound Hobby"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHobby2" />
+
+    <TextView
+        android:id="@+id/CurHobby"
+        android:layout_width="384dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="15dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/CurProffesion"
+        android:layout_width="382dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="15dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CurHobby" />
+
+    <TextView
+        android:id="@+id/CurLocation"
+        android:layout_width="382dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="15dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CurProffesion" />
+
+    <Button
+        android:id="@+id/SaveInfoEdit"
+        android:layout_width="144dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toEndOf="@+id/ReloadBtn"
+        app:layout_constraintTop_toBottomOf="@+id/ProfessionInfoEdit" />
+
+    <Button
+        android:id="@+id/ReloadBtn"
+        android:layout_width="144dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="28dp"
+        android:text="Reload"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfessionInfoEdit" />
+
+    <TextView
+        android:id="@+id/textViewProfession"
+        android:layout_width="138dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Choose Profession"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHobby3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

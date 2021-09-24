@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/ic_bgcolor">
+    android:background="@drawable/ic_bgcolor"
+    tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/logInBtn"
+        android:id="@+id/CreateUserBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="160dp"
@@ -59,7 +59,7 @@
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Enter Password"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,5 +77,22 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/WelcomeTxt" />
+
+    <TextView
+        android:id="@+id/ForgotPassTxt"
+        android:layout_width="131dp"
+        android:layout_height="26dp"
+        android:clickable="true"
+        android:gravity="center_horizontal"
+        android:text="Forgot Password?"
+        android:textColor="#37C891"
+        android:textColorHint="#FFFFFF"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/CreateUserBtn"
+        app:layout_constraintEnd_toStartOf="@+id/SignInBtn"
+        app:layout_constraintHorizontal_bias="0.258"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Password"
+        app:layout_constraintVertical_bias="0.521" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

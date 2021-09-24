@@ -6,12 +6,18 @@ public class UserInfo {
     public String cash;
     public String userLocation;
     public String reportSent;public String reportGot;
+    public String hobby;public String profession;public String hobby2;public String hobby3;
+    public ReportsTime reportsTime;
+    public String roomCode;
+    public String usersRooms;
+    public UserLikes userLikes;
 
     public UserInfo() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public UserInfo(TheQOfUser Qnum1,TheQOfUser Qnum2,TheQOfUser Qnum3,TheQOfUser Qnum4,TheQOfUser Qnum5, String cash, String UserLocation,String reportSent,String reportGot) {
+    public UserInfo(TheQOfUser Qnum1,TheQOfUser Qnum2,TheQOfUser Qnum3,TheQOfUser Qnum4,TheQOfUser Qnum5, String cash,
+                    String UserLocation,String reportSent,String reportGot,String Hobby,String Hobby2,String Hobby3,String Profession, ReportsTime reportsTime,String RoomCode,String UsersRooms,UserLikes userLikes) {
         this.cash = cash;
         this.userLocation = UserLocation;
         this.reportGot = reportGot;
@@ -21,6 +27,14 @@ public class UserInfo {
         this.qnum3 = Qnum3;
         this.qnum4 = Qnum4;
         this.qnum5 = Qnum5;
+        this.hobby=Hobby;
+        this.profession=Profession;
+        this.hobby2=Hobby2;
+        this.hobby3=Hobby3;
+        this.reportsTime=reportsTime;
+        this.roomCode=RoomCode;
+        this.usersRooms=UsersRooms;
+        this.userLikes=userLikes;
     }
 
     public TheQOfUser getQnum1() {
@@ -93,5 +107,69 @@ public class UserInfo {
 
     public void setReportGot(String reportGot) {
         this.reportGot = reportGot;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getHobby2() {
+        return hobby2;
+    }
+
+    public void setHobby2(String hobby2) {
+        this.hobby2 = hobby2;
+    }
+
+    public String getHobby3() {
+        return hobby3;
+    }
+
+    public void setHobby3(String hobby3) {
+        this.hobby3 = hobby3;
+    }
+
+    public ReportsTime getReportsTime() {
+        return reportsTime;
+    }
+
+    public void setReportsTime(ReportsTime reportsTime) {
+        this.reportsTime = reportsTime;
+    }
+
+    public String getRoomCode() {
+        return roomCode;
+    }
+
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
+    }
+
+    public String getUsersRooms() {
+        return usersRooms;
+    }
+
+    public void setUsersRooms(String usersRooms) {
+        this.usersRooms = usersRooms;
+    }
+
+    public UserLikes getUserLikes() {
+        return userLikes;
+    }
+
+    public void setUserLikes(UserLikes userLikes) {
+        this.userLikes = userLikes;
     }
 }

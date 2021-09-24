@@ -17,8 +17,8 @@ public class WelcomePageMessageOnCreate extends AppCompatActivity {
 
         Button Btn = findViewById(R.id.ContinueBtn);
         TextView welcomeTxt = findViewById(R.id.welcomeTxt);
-        String t = "Welcome to Ask A!"+"\n"+"\n"+"Things you need to know:"+"\n"+ "To Ask a Q - you need to pay 3 Coins."+"\n"+"\n"+"To Earn Coins - you need to A Questions."
-                +"\n"+"\n"+ "Please, make sure you Answer you Questions with full honesty."+"\n"+"\n"+"As a welcome gift we add for you 5 Coins!"+"\n"+"\n"+ "To Continue - Press the Btn "
+        String t = "Welcome to Ask A!"+"\n"+"\n"+"Things you need to know:"+"\n"+ "To Ask a Q - you need to pay 2 Coins."+"\n"+"\n"+"To Earn Coins - you need to Answer Questions."
+                +"\n"+"\n"+ "Please, make sure you Answer your Questions with full honesty."+"\n"+"\n"+"As a welcome gift you have been added 5 Coins!"+"\n"+"\n"+ "To Continue - Press the Btn "
                 +"\n"+"\n"+"\t"+"-Ask A-";
         welcomeTxt.setText(t);
 

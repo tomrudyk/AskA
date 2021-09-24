@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.AskA" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#EEC9BC</item>
+        <item name="colorPrimary">#7ce5bd</item>
         <item name="colorPrimaryVariant">#c2e9fb</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

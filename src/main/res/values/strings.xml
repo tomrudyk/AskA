@@ -2,21 +2,92 @@
     <string name="app_name">Ask A</string>
 
     <string-array name="States">
-        <item>Israel</item>
-        <item>Congo</item>
-        <item>Germany</item>
-        <item>Poland</item>
-        <item>America</item>
-        <item>Russia</item>
-        <item>China</item>
-        <item>Japan</item>
-        <item>France</item>
-        <item>Mexico</item>
-        <item>Italy</item>
+        <item>null</item>
+        <item>Afghanistan</item>
+        <item>Argentina</item>
         <item>Australia</item>
+        <item>Austria</item>
+        <item>Bangladesh</item>
+        <item>Belgium</item>
+        <item>Brazil</item>
+        <item>Bulgaria</item>
+        <item>Cameroon</item>
         <item>Canada</item>
+        <item>China</item>
+        <item>Colombia</item>
+        <item>Canada</item>
+        <item>Croatia</item>
+        <item>Congo</item>
+        <item>Cuba</item>
+        <item>Denmark</item>
+        <item>Egypt</item>
+        <item>England</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>Georgia</item>
+        <item>Germany</item>
+        <item>Greece</item>
+        <item>Hungary</item>
+        <item>Iceland</item>
+        <item>India</item>
+        <item>Iran</item>
+        <item>Ireland</item>
+        <item>Israel</item>
+        <item>Italy</item>
+        <item>Japan</item>
+        <item>Jordan</item>
+        <item>Kazakhstan</item>
+        <item>Kenya</item>
+        <item>Lebanon</item>
+        <item>Madagascar</item>
+        <item>Mexico</item>
+        <item>Moldova</item>
+        <item>Monaco</item>
+        <item>Morocco</item>
+        <item>Netherlands</item>
+        <item>New Zealand</item>
+        <item>Nigeria</item>
+        <item>Norway</item>
+        <item>Pakistan</item>
+        <item>Paraguay</item>
+        <item>Peru</item>
+        <item>Philippines</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Romania</item>
+        <item>Russia</item>
+        <item>Saudi Arabia</item>
+        <item>Senegal</item>
+        <item>Serbia</item>
+        <item>Singapore</item>
+        <item>Slovakia</item>
+        <item>Slovenia</item>
+        <item>Somalia</item>
+        <item>South Africa</item>
+        <item>South Korea</item>
+        <item>Spain</item>
+        <item>Sudan</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Syria</item>
+        <item>Tanzania</item>
+        <item>Thailand</item>
+        <item>Turkey</item>
+        <item>Uganda</item>
+        <item>Ukraine</item>
+        <item>United Arab Emirates</item>
+        <item>United States of America</item>
+        <item>Uzbekistan</item>
+        <item>Venezuela</item>
+        <item>Vietnam</item>
+        <item>Yemen</item>
+        <item>Zambia</item>
+        <item>Zimbabwe</item>
 
     </string-array>
+
+
+
     <string-array name="ForbiddenLanguage">
         <item>fuck</item>
         <item>Suck</item>
@@ -29,5 +100,116 @@
         <item>assholes</item>
         <item>motherfucker</item>
         <item>motherfucker</item>
+    </string-array>
+
+
+
+
+
+    <string-array name="Hobbies">
+        <item>None</item>
+        <item>Archery</item>
+        <item>Baseball</item>
+        <item>Basketball</item>
+        <item>Bicycling</item>
+        <item>Bird Watching</item>
+        <item>Board Games</item>
+        <item>Collecting</item>
+        <item>Cooking</item>
+        <item>Dancing</item>
+        <item>Fishing</item>
+        <item>Football</item>
+        <item>Gaming</item>
+        <item>Gardening</item>
+        <item>Golf</item>
+        <item>Gym</item>
+        <item>Knitting</item>
+        <item>Origami</item>
+        <item>Photography</item>
+        <item>Playing Cards Tennis</item>
+        <item>Playing Drums</item>
+        <item>Playing Guitar</item>
+        <item>Playing Piano</item>
+        <item>Playing Saxophone</item>
+        <item>Playing Violin</item>
+        <item>Poker</item>
+        <item>Programming</item>
+        <item>Reading</item>
+        <item>Running</item>
+        <item>Shopping</item>
+        <item>Surfing</item>
+        <item>Swimming</item>
+        <item>Traveling</item>
+        <item>Volunteering</item>
+        <item>Watching Sports</item>
+        <item>Watching TV</item>
+        <item>Yoga</item>
+
+    </string-array>
+
+
+
+
+
+
+
+
+
+    <string-array name="Professions">
+        <item>None</item>
+        <item>Accounting</item>
+        <item>Actor</item>
+        <item>Ambulance Driver</item>
+        <item>School administrator</item>
+        <item>App developer</item>
+        <item>Architect</item>
+        <item>Barman</item>
+        <item>Business owner</item>
+        <item>Carpenter</item>
+        <item>CEO</item>
+        <item>Cook</item>
+        <item>Chef</item>
+        <item>Choreographer</item>
+        <item>Cleaner</item>
+        <item>Clerk</item>
+        <item>Comedian</item>
+        <item>Confectioner</item>
+        <item>Gamer</item>
+        <item>Graphic designer</item>
+        <item>Guard</item>
+        <item>Director</item>
+        <item>DJ</item>
+        <item>Editor</item>
+        <item>Electrician</item>
+        <item>Farmer</item>
+        <item>Farrier</item>
+        <item>Graphic designer</item>
+        <item>Hairdresser</item>
+        <item>Jewellery maker</item>
+        <item>Journalist</item>
+        <item>Lawyer</item>
+        <item>Lifeguard</item>
+        <item>Magician</item>
+        <item>Musician</item>
+        <item>Nanny</item>
+        <item>Nurse</item>
+        <item>Pharmacist</item>
+        <item>Photographer</item>
+        <item>Physicist</item>
+        <item>Plumber</item>
+        <item>Police officer</item>
+        <item>Programmer</item>
+        <item>Radio Broadcaster</item>
+        <item>Restaurant owner</item>
+        <item>Soldier</item>
+        <item>Sportsman</item>
+        <item>Student</item>
+        <item>Teacher</item>
+        <item>Vet</item>
+        <item>Waiter</item>
+        <item>Woodworker</item>
+        <item>Writer</item>
+
+
     </string-array>
 </resources>

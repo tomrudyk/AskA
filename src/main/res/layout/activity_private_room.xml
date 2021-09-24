@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PrivateRoom"
+    android:background="@drawable/ic_bgcolor">
+
+    <EditText
+        android:id="@+id/JoinRoomCode"
+        android:layout_width="260dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="92dp"
+        android:ems="10"
+        android:hint="Enter Code"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserRoomCodeTxt" />
+
+    <Button
+        android:id="@+id/JoinRoomBtn"
+        android:layout_width="123dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="112dp"
+        android:text="Join"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/JoinRoomCode" />
+
+    <Button
+        android:id="@+id/CreateRoomBtn"
+        android:layout_width="155dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:text="Create Room"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/JoinRoomBtn"
+        app:layout_constraintVertical_bias="0.837" />
+
+    <Button
+        android:id="@+id/AnswerYourRoom"
+        android:layout_width="155dp"
+        android:layout_height="53dp"
+        android:text="Answer your Room Q"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.616"
+        app:layout_constraintStart_toEndOf="@+id/CreateRoomBtn"
+        app:layout_constraintTop_toBottomOf="@+id/JoinRoomBtn"
+        app:layout_constraintVertical_bias="0.837" />
+
+    <TextView
+        android:id="@+id/UserRoomCodeTxt"
+        android:layout_width="296dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="56dp"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

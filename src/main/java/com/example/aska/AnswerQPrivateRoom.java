@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
-public class AnswerQ extends AppCompatActivity {
+public class AnswerQPrivateRoom extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
@@ -33,7 +31,7 @@ public class AnswerQ extends AppCompatActivity {
     private String UserId = mAuth.getCurrentUser().getUid();
 
     private String UserLocation = "";private String UserCash = "";
-    private String UserHobby = "";private String UserProfession = "";private String UserHobby2 = "";private String UserHobby3 = "";
+    private String UserHobby = "";private String UserProfession = "";private String UserHobby2 = "";
     private int ChildrenCount = 0;private int ChildrenCountNullState = 0;private int ChildrenBoth = 0;
     private boolean IsStateNull;
     private String TheQOfLocationCard = "";private String TheAOfLocationCard = "";
@@ -48,6 +46,7 @@ public class AnswerQ extends AppCompatActivity {
     private String A4="";private String A5="";
     private String OtherUserCash = "";private String OtherUserLocation;
     private ReportsTime ControllerReportsTime;
+    private String UserOwnRoom;
 
 
 
@@ -56,13 +55,12 @@ public class AnswerQ extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_answer_q);
+        setContentView(R.layout.activity_answer_q_private_room);
 
 
         Button nextBtn = findViewById(R.id.nextQBtnPrivateRoom);
         Button SendA = findViewById(R.id.SendABtnPrivateRoom);
         Button Reload = findViewById(R.id.ReloadAnswerQPrivateRoom);
-        Reload.performClick();
         TextView TheQuestion = findViewById(R.id.TheQTxtPrivateRoom);
         TextView LocationView = findViewById(R.id.QLocationTxtPrivateRoom);
         TextView cashView = findViewById(R.id.cashViewPrivateRoom);
@@ -80,16 +78,17 @@ public class AnswerQ extends AppCompatActivity {
             public void onClick(View v) {
                 TheQuestion.setText(TheQOfLocationCard);
                 cashView.setText(UserCash);
-                LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession);
+                LocationView.setText(QLocation);
                 SendA.setEnabled(false);
-                boolean CheckHobby= (TheQOfLocationCardHobby.equals(UserHobby))||(TheQOfLocationCardHobby.equals("None"))
-                        ||(TheQOfLocationCardHobby.equals(UserHobby2)||(TheQOfLocationCardHobby.equals(UserHobby3)));
+                boolean CheckHobby= (TheQOfLocationCardHobby.equals(UserHobby))||(TheQOfLocationCardHobby.equals("None"))||(TheQOfLocationCardHobby.equals(UserHobby2));
                 boolean CheckProfession= (TheQOfLocationCardProfession.equals(UserProfession))||(TheQOfLocationCardProfession.equals("None"));
                 if((TheAOfLocationCard.equals("0")&&(CheckHobby)&&(CheckProfession))){
                     TheQuestion.setText(TheQOfLocationCard);
-                    LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession);
+                    LocationView.setText(QLocation);
                     cashView.setText(UserCash);
                     SendA.setEnabled(true);
+                    TheAnswerOfQ.clearFocus();
+                    TheAnswerOfQ.setText("");
                     myRef = database.getReference("Users").child(UserIdOfSenderLocationCard);
                     getValueOfOtherUser(myRef);
                     // Add Profession and Hobby asked for the Q
@@ -97,6 +96,8 @@ public class AnswerQ extends AppCompatActivity {
                 else{
                     TheQuestion.setText("No Q Found -");
                     LocationView.setText("No Q Found -");
+                    TheAnswerOfQ.clearFocus();
+                    TheAnswerOfQ.setText("");
                 }
             }
         });
@@ -104,20 +105,28 @@ public class AnswerQ extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myRef = database.getReference("Users").child(UserId);
-                getValueOfUser(myRef);
-                myRef = database.getReference(UserLocation+UserLocation);
-                getValueOfState(myRef);
-                myRef = database.getReference("nullnull");
-                getValueOfStateNull(myRef);
-                SendA.setEnabled(true);
-                RandomQ();
-                TheQuestion.setText(TheQOfLocationCard);
-                cashView.setText(UserCash);
-                LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession);
-                TheAnswerOfQ.clearFocus();
-                TheAnswerOfQ.setText("");
-                ReloadQInfo();
+                if (UserOwnRoom != null) {
+                    myRef = database.getReference("Users").child(UserId);
+                    getValueOfUser(myRef);
+                    myRef = database.getReference("Rooms").child(UserOwnRoom.toString()).child("QuestionCount");
+                    getValueOfRoom(myRef);
+                    SendA.setEnabled(true);
+                    RandomQ();
+                    TheQuestion.setText(TheQOfLocationCard);
+                    cashView.setText(UserCash);
+                    LocationView.setText(QLocation);
+                    TheAnswerOfQ.clearFocus();
+                    TheAnswerOfQ.setText("");
+                    Reload.performClick();
+                }
+                else{
+                    myRef = database.getReference("Users").child(UserId);
+                    getValueOfUser(myRef);
+                    if (UserOwnRoom!=null) {
+                        myRef = database.getReference("Rooms").child(UserOwnRoom.toString()).child("QuestionCount");
+                        getValueOfRoom(myRef);
+                    }
+                }
             }
         });
 
@@ -127,7 +136,7 @@ public class AnswerQ extends AppCompatActivity {
                 String UserAns = TheAnswerOfQ.getText().toString();
                 if(UserAns=="null"||!EmptyFromForbiddenLanguage(UserAns)||UserAns.isEmpty()){
 
-                    Toast.makeText(AnswerQ.this, "Ans Is Empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AnswerQPrivateRoom.this, "Ans Is Empty", Toast.LENGTH_SHORT).show();
 
                 }
                 else{
@@ -135,7 +144,7 @@ public class AnswerQ extends AppCompatActivity {
                         UserAns = "Zero";
                     }
 
-                    myRef = database.getReference(QLocation).child(NumOfQInState);
+                    myRef = database.getReference("Rooms").child(UserOwnRoom).child(NumOfQInState);
                     LocationCard TheLocationCard = new LocationCard(TheQOfLocationCard, UserAns, UserIdOfSenderLocationCard , UserId, TheQOfLocationCardHobby, TheQOfLocationCardProfession);
                     myRef.setValue(TheLocationCard);
 
@@ -188,25 +197,9 @@ public class AnswerQ extends AppCompatActivity {
                 }
                 TheAnswerOfQ.clearFocus();
                 TheAnswerOfQ.setText("");
+                nextBtn.performClick();
+                nextBtn.performClick();
                 SendA.setEnabled(false);
-                ReloadQInfo();
-            }
-        });
-
-        TheAnswerOfQ.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                ReloadQInfo();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -219,7 +212,7 @@ public class AnswerQ extends AppCompatActivity {
         String[] ForbiddenLanguage = getResources().getStringArray(R.array.ForbiddenLanguage);
         for (int i=0;i<ForbiddenLanguage.length;i++){
             if(Ans.contains(ForbiddenLanguage[i])){
-                Toast.makeText(AnswerQ.this, "You Are Using Forbidden Language", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AnswerQPrivateRoom.this, "You Are Using Forbidden Language", Toast.LENGTH_SHORT).show();
                 return (false);
             }
         }
@@ -235,59 +228,13 @@ public class AnswerQ extends AppCompatActivity {
                 UserLocation= userInfo.getUserLocation();
                 UserHobby = userInfo.getHobby();
                 UserHobby2=userInfo.getHobby2();
-                UserHobby3=userInfo.getHobby3();
                 UserProfession = userInfo.getProfession();
                 ControllerReportsTime = userInfo.getReportsTime();
                 boolean CheckIfNotBan = CheckIfCanLogIn(); //Checks If You get Banned During the use of the app
                 if(!CheckIfNotBan){
                     changeActivityIfBanned();
                 }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-            }
-        };
-        DatabaseGetValue.addValueEventListener(postListener);
-    }
-
-    public void getValueOfState(DatabaseReference DatabaseGetValue){
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String StateCounterNum = dataSnapshot.getValue(String.class);
-                if (StateCounterNum==null){
-                   // getValueOfState(DatabaseGetValue);     Making the App lag hard
-                }
-                else{
-                    ChildrenCount = Integer.parseInt(StateCounterNum);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
-            }
-        };
-        DatabaseGetValue.addValueEventListener(postListener);
-    }
-
-    public void getValueOfStateNull(DatabaseReference DatabaseGetValue){
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String StateCounterNum = dataSnapshot.getValue(String.class);
-                if (StateCounterNum==null){
-                  //  getValueOfStateNull(DatabaseGetValue);     Making the App lag hard
-                }
-                else{
-                    ChildrenCountNullState = Integer.parseInt(StateCounterNum);
-                }
+                UserOwnRoom = userInfo.getRoomCode();
 
             }
 
@@ -346,6 +293,7 @@ public class AnswerQ extends AppCompatActivity {
                 LocationsOfQOtherUser[3] = userInfo.getQnum4().getqLocation();
                 LocationsOfQOtherUser[4] = userInfo.getQnum5().getqLocation();
 
+
             }
 
             @Override
@@ -360,10 +308,8 @@ public class AnswerQ extends AppCompatActivity {
     public void RandomQ(){
         myRef = database.getReference("Users").child(UserId);
         getValueOfUser(myRef);
-        myRef = database.getReference(UserLocation+UserLocation);
-        getValueOfState(myRef);
-        myRef = database.getReference("nullnull");
-        getValueOfStateNull(myRef);
+        myRef = database.getReference("Rooms").child(UserOwnRoom.toString()).child("QuestionCount");
+        getValueOfRoom(myRef);
         TextView TheQuestion = findViewById(R.id.TheQTxtPrivateRoom);
         TextView LocationView = findViewById(R.id.QLocationTxtPrivateRoom);
         TextView cashView = findViewById(R.id.cashViewPrivateRoom);
@@ -373,44 +319,27 @@ public class AnswerQ extends AppCompatActivity {
         SendA.setEnabled(false);
         cashView.setText(UserCash);
 
-        ChildrenBoth=ChildrenCount+ChildrenCountNullState;
-        if (ChildrenBoth==0){
-            ChildrenBoth=1;
-        }
         Random rd = new Random();
-        int RandomInt = rd.nextInt(ChildrenBoth)+1;
-        if(RandomInt<=ChildrenCount){
-            IsStateNull=false;
-            myRef = database.getReference(UserLocation).child(String.valueOf(RandomInt));
-            getValueOfCardLocation(myRef);
-            QLocation=UserLocation;
-            NumOfQInState=String.valueOf(RandomInt);
-        }
-        else{
-            IsStateNull=true;
-            myRef = database.getReference("null").child(String.valueOf(ChildrenBoth-RandomInt));
-            getValueOfCardLocation(myRef);
-            QLocation="null";
-            NumOfQInState=String.valueOf(ChildrenBoth-RandomInt);
-        }
+        int RandomInt = rd.nextInt(ChildrenCount+1);
+        myRef = database.getReference("Rooms").child(UserOwnRoom.toString()).child(String.valueOf(RandomInt));
+        getValueOfCardLocation(myRef);
+        QLocation=UserOwnRoom;
+        NumOfQInState=String.valueOf(RandomInt);
 
-        boolean CheckHobby= (TheQOfLocationCardHobby.equals(UserHobby))||(TheQOfLocationCardHobby.equals("None"))
-                ||(TheQOfLocationCardHobby.equals(UserHobby2)||(TheQOfLocationCardHobby.equals(UserHobby3)));
-        boolean CheckProfession= (TheQOfLocationCardProfession.equals(UserProfession))||(TheQOfLocationCardProfession.equals("None"));
-        if((TheAOfLocationCard.equals("0")&&(CheckHobby)&&(CheckProfession))){
+
+        if((TheAOfLocationCard.equals("0"))){
             TheQuestion.setText(TheQOfLocationCard);
-            LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession);
+            LocationView.setText(QLocation);
             cashView.setText(UserCash);
             SendA.setEnabled(true);
             myRef = database.getReference("Users").child(UserIdOfSenderLocationCard);
             getValueOfOtherUser(myRef);
+            // Add Profession and Hobby ask for in the Q
         }
         else{
             TheQuestion.setText("No Q Found -");
             LocationView.setText("No Q Found -");
         }
-        Button Reload = findViewById(R.id.ReloadAnswerQPrivateRoom);
-        ReloadQInfo();
     }
 
     public boolean CheckIfCanLogIn(){
@@ -424,7 +353,7 @@ public class AnswerQ extends AppCompatActivity {
         }
         else {
             if(TimeString.equals("Error")||TimeString.equals("Forever")){
-                Toast.makeText(AnswerQ.this, "You have been banned", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AnswerQPrivateRoom.this, "You have been banned", Toast.LENGTH_SHORT).show();
                 return false;
             }
             int BanYear = Integer.valueOf(TimeString.substring(TimeString.indexOf("Y") + 1, TimeString.indexOf(",Min")));
@@ -434,7 +363,7 @@ public class AnswerQ extends AppCompatActivity {
             if (!c){
                 BanYear=BanYear+1900;
                 BanMonth=BanMonth+1;
-                Toast.makeText(AnswerQ.this, "Banned till - "+BanDay+"."+BanMonth+"." +BanYear , Toast.LENGTH_SHORT).show();
+                Toast.makeText(AnswerQPrivateRoom.this, "Banned till - "+BanDay+"."+BanMonth+"." +BanYear , Toast.LENGTH_SHORT).show();
             }
             return (c);
         }
@@ -445,33 +374,26 @@ public class AnswerQ extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void ReloadQInfo(){
-        Button SendA = findViewById(R.id.SendABtnPrivateRoom);
-        Button Reload = findViewById(R.id.ReloadAnswerQPrivateRoom);
-        TextView TheQuestion = findViewById(R.id.TheQTxtPrivateRoom);
-        TextView LocationView = findViewById(R.id.QLocationTxtPrivateRoom);
-        TextView cashView = findViewById(R.id.cashViewPrivateRoom);
-        TheQuestion.setText(TheQOfLocationCard);
-        cashView.setText(UserCash);
-        LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession);
-        SendA.setEnabled(false);
-        boolean CheckHobby= (TheQOfLocationCardHobby.equals(UserHobby))||(TheQOfLocationCardHobby.equals("None"))
-                ||(TheQOfLocationCardHobby.equals(UserHobby2)||(TheQOfLocationCardHobby.equals(UserHobby3)));
-        boolean CheckProfession= (TheQOfLocationCardProfession.equals(UserProfession))||(TheQOfLocationCardProfession.equals("None"));
-        if((TheAOfLocationCard.equals("0")&&(CheckHobby)&&(CheckProfession))){
-            TheQuestion.setText(TheQOfLocationCard);
-            LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession);
-            cashView.setText(UserCash);
-            SendA.setEnabled(true);
-            myRef = database.getReference("Users").child(UserIdOfSenderLocationCard);
-            getValueOfOtherUser(myRef);
-            // Add Profession and Hobby asked for the Q
-        }
-        else{
-            TheQuestion.setText("No Q Found -");
-            LocationView.setText("No Q Found -");
-        }
-        Reload.performClick();
+    public void getValueOfRoom(DatabaseReference DatabaseGetValue) {
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String StateCounterNum = dataSnapshot.getValue(String.class);
+                if (StateCounterNum == null) {
+                    getValueOfRoom(DatabaseGetValue);
+                } else {
+                    ChildrenCount = Integer.parseInt(StateCounterNum);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        DatabaseGetValue.addValueEventListener(postListener);
     }
 
 }

@@ -2,21 +2,28 @@ package com.example.aska;
 
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.media.MediaRouter;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.aska.AnswerQ;
+import com.example.aska.LocationCard;
+import com.example.aska.MyInfo;
+import com.example.aska.R;
+import com.example.aska.TheQOfUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,8 +31,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.ArrayList; // import the ArrayList class
+
 
 
 public class MainActivity2 extends AppCompatActivity {
@@ -42,8 +51,12 @@ public class MainActivity2 extends AppCompatActivity {
     private String Q1="";private String Q2="";private String Q3="";
     private String Q4="";private String Q5="";private String StringCash;
 
-    private String ChosenLocation;
-    StateDialog stateDialog = new StateDialog();
+    private Spinner DialogLocationToAsk;private String LocationToAsk;
+    private Spinner DialogHobbyToAsk;private Spinner DialogProfessionToAsk;
+    private String HobbyToAsk;private String ProfessionToAsk;
+    private ReportsTime ControllerReportsTime;
+    private String UsersRoomsJoined;
+
 
 
     @Override
@@ -57,27 +70,66 @@ public class MainActivity2 extends AppCompatActivity {
         Button GotoAnswerBtn = findViewById(R.id.GoToAnswer);
         Button PersonalInfoBtn = findViewById(R.id.PersonalInfo);
         Button SendQ = findViewById(R.id.SendQ);
-        TextView LocationToAsk = findViewById(R.id.LocationToAsk);
+        Button PrivateRooms = findViewById(R.id.PrivateRooms);
         EditText TheQ = findViewById(R.id.TheQ);
-        Button LocationChoose = findViewById(R.id.LocationChooseBtn);
 
         QuestionEditor("0", "0", UserId); /// The First Q is Always not working - that way it will not work and user won't notice
 
-
-        LocationChoose.setOnClickListener(new View.OnClickListener() { /// Lo Oved Maspik Tov!!!!!!!!!!!!!!!!!!!!!!!!***************************
+        DialogLocationToAsk = findViewById(R.id.LocationToAskList);
+        String[] StateList = getResources().getStringArray(R.array.States);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, StateList);
+        DialogLocationToAsk.setAdapter(adapter1);
+        DialogLocationToAsk.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                openStateDialog();
-                ChosenLocation=stateDialog.getChosenState();
-                LocationToAsk.setText(String.valueOf(ChosenLocation));
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                LocationToAsk= (String) parent.getItemAtPosition(position);
+            }
 
-
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
             }
         });
 
+        DialogHobbyToAsk = findViewById(R.id.Hobbytoask);
+        String[] HobbyList = getResources().getStringArray(R.array.Hobbies);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, HobbyList);
+        DialogHobbyToAsk.setAdapter(adapter2);
+        DialogHobbyToAsk.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                HobbyToAsk= (String) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+        DialogProfessionToAsk = findViewById(R.id.Professiontoask);
+        String[] ProfessionList = getResources().getStringArray(R.array.Professions);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ProfessionList);
+        DialogProfessionToAsk.setAdapter(adapter3);
+        DialogProfessionToAsk.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                ProfessionToAsk= (String) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+
         GotoAnswerBtn.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 changeActivity2();
             }
         });
@@ -93,44 +145,48 @@ public class MainActivity2 extends AppCompatActivity {
         SendQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!LocationToAsk.getText().toString().equals("null")) {
-                    if(EmptyFromForbiddenLanguage(TheQ.getText().toString().toLowerCase())) {
-                        QuestionEditor(TheQ.getText().toString(), "0", UserId);
-                        ChildrenCount = 0;
-                    }
-                }else{
-                    Toast.makeText(MainActivity2.this, "Location is null", Toast.LENGTH_SHORT).show();
+                if(EmptyFromForbiddenLanguage(TheQ.getText().toString().toLowerCase())) {
+                    QuestionEditor(TheQ.getText().toString(), "0", UserId);
+                    ChildrenCount = 0;
+                    TheQ.setText("");
                 }
+
             }
 
         });
 
-        LocationToAsk.addTextChangedListener(new TextWatcher() {
+        TheQ.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                myRef = database.getReference(LocationToAsk+LocationToAsk);
+                getValueOfState(myRef);
+                ChildrenCount=0;
+                myRef = database.getReference("Users").child(UserId);
+                getValueOfUser(myRef);
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                String LocationOfQ = LocationToAsk.getText().toString();
-                myRef = database.getReference(LocationOfQ+LocationOfQ);
-                getValueOfState(myRef);
-                ChildrenCount=0;
+            }
+        });
+
+        PrivateRooms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeActivity3();
             }
         });
 
     }
 
 
-
     public void QuestionEditor(String Q, String A, String UserId) {
-        TextView LocationToAsk = findViewById(R.id.LocationToAsk);
-        String LocationOfQ = LocationToAsk.getText().toString();
-        myRef = database.getReference(LocationOfQ+LocationOfQ);
+        myRef = database.getReference(LocationToAsk+LocationToAsk);
         getValueOfState(myRef);
         if (Q.equals("0")){
             Q="Zero";
@@ -164,22 +220,20 @@ public class MainActivity2 extends AppCompatActivity {
         }
         if(CheckForCash(StringCash)) {
             if (SpaceForQFlag != 0) {
-                LocationToAsk = findViewById(R.id.LocationToAsk);
-                LocationOfQ = LocationToAsk.getText().toString();
                 String Ans0 = "0";
-                myRef = database.getReference(LocationOfQ + LocationOfQ);
+                myRef = database.getReference((LocationToAsk + LocationToAsk).toString());
                 getValueOfState(myRef);
                 String qNumString = String.valueOf(ChildrenCount + 1);
-                myRef = database.getReference(LocationOfQ).child(qNumString);
-                LocationCard QCard = new LocationCard(Q, Ans0, UserId, "0");
+                myRef = database.getReference(LocationToAsk).child(qNumString);
+                LocationCard QCard = new LocationCard(Q, Ans0, UserId, "0",HobbyToAsk,ProfessionToAsk);
                 myRef.setValue(QCard);
-                myRef = database.getReference(LocationOfQ + LocationOfQ);
+                myRef = database.getReference((LocationToAsk + LocationToAsk).toString());
                 myRef.setValue(qNumString);
-                QCard = new LocationCard(Q, Ans0, UserId, "0");
-                myRef = database.getReference(LocationOfQ).child(qNumString);
+                QCard = new LocationCard(Q, Ans0, UserId, "0",HobbyToAsk,ProfessionToAsk);
+                myRef = database.getReference(LocationToAsk).child(qNumString);
                 myRef.setValue(QCard);
 
-                TheQOfUser TheQOfUser1 = new TheQOfUser(Q, "0", LocationOfQ, String.valueOf(ChildrenCount + 1));
+                TheQOfUser TheQOfUser1 = new TheQOfUser(Q, "0", LocationToAsk, String.valueOf(ChildrenCount + 1),HobbyToAsk,ProfessionToAsk);
                 myRef = database.getReference("Users").child(UserId).child("qnum" + (SpaceForQFlag));
                 myRef.setValue(TheQOfUser1);
                 Toast.makeText(MainActivity2.this, "Question Send, "+(SpaceForQFlag - 1)+ "-Question Space", Toast.LENGTH_SHORT).show();
@@ -197,6 +251,7 @@ public class MainActivity2 extends AppCompatActivity {
             }
         }
         ChildrenCount=0;
+
 
     }
 
@@ -224,6 +279,7 @@ public class MainActivity2 extends AppCompatActivity {
         DatabaseGetValue.addValueEventListener(postListener);
     }
 
+
     public void getValueOfUser(DatabaseReference DatabaseGetValue){
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -244,7 +300,13 @@ public class MainActivity2 extends AppCompatActivity {
                     Q3 = TheUserQ3.getUserQ();
                     Q4 = TheUserQ4.getUserQ();
                     Q5 = TheUserQ5.getUserQ();
-                    String UserLocation = userInfo.getUserLocation();
+
+                    ControllerReportsTime = userInfo.getReportsTime();
+                    boolean CheckIfNotBan = CheckIfCanLogIn(); //Checks If You get Banned During the use of the app
+                    if(!CheckIfNotBan){
+                        changeActivityIfBanned();
+                    }
+                    UsersRoomsJoined=userInfo.getUsersRooms();
                 }
 
             }
@@ -268,10 +330,10 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = new Intent(this, AnswerQ.class);
         startActivity(intent);
     }
-    public void openStateDialog(){
-        stateDialog.show(getSupportFragmentManager(), "StateDialog");
+    public void changeActivity3() {
+        Intent intent = new Intent(this, PrivateRoom.class);
+        startActivity(intent);
     }
-
     public boolean EmptyFromForbiddenLanguage(String Ans){
         String[] ForbiddenLanguage = getResources().getStringArray(R.array.ForbiddenLanguage);
         for (int i=0;i<ForbiddenLanguage.length;i++){
@@ -296,6 +358,39 @@ public class MainActivity2 extends AppCompatActivity {
             }
         }
     }
+
+    public boolean CheckIfCanLogIn(){
+        Date currentTime = Calendar.getInstance().getTime();
+        int currentYear = currentTime.getYear();// +1900
+        int currentMonth = currentTime.getMonth();// Jan==0
+        int currentDay = currentTime.getDate();
+        String TimeString = ControllerReportsTime.getBanTill(); /// String = D00,M00,Y000,Min00,H00,E  -----Jan==0, Year = Year+1900, T=Min
+        if(TimeString.equals("0")){
+            return true;
+        }
+        else {
+            if(TimeString.equals("Error")||TimeString.equals("Forever")){
+                Toast.makeText(MainActivity2.this, "You have been banned", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            int BanYear = Integer.valueOf(TimeString.substring(TimeString.indexOf("Y") + 1, TimeString.indexOf(",Min")));
+            int BanMonth = Integer.valueOf(TimeString.substring(TimeString.indexOf("M") + 1, TimeString.indexOf(",Y")));
+            int BanDay = Integer.valueOf(TimeString.substring(TimeString.indexOf("D") + 1, TimeString.indexOf(",M")));
+            boolean c = (currentYear >= BanYear) && (currentMonth >= BanMonth) && (currentDay >= BanDay);
+            if (!c){
+                BanYear=BanYear+1900;
+                BanMonth=BanMonth+1;
+                Toast.makeText(MainActivity2.this, "Banned till - "+BanDay+"."+BanMonth+"." +BanYear , Toast.LENGTH_SHORT).show();
+            }
+            return (c);
+        }
+    }
+
+    public void changeActivityIfBanned() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }
