@@ -147,7 +147,7 @@ public class EditUserInfo extends AppCompatActivity {
             public void onClick(View v) {
                 myRef = database.getReference("Users").child(UserId);
                 getValueOfUser(myRef);
-                CurHobby.setText("Current Hobbies: 1- "+ UserHobby.toString()+"\n"+"2- "+ UserHobby2.toString()+"\n"+"3- "+ UserHobby3.toString());
+                CurHobby.setText("Current Hobbies:" + "\n" + " 1- " + UserHobby.toString() + "\n" + "2- " + UserHobby2.toString() + "\n" + "3- " + UserHobby3.toString());
                 CurProfession.setText("Current Profession: "+ UserProfession.toString());
                 CurLocation.setText("Your Location: "+ UserLocation.toString());
             }

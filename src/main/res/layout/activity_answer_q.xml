@@ -75,7 +75,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:gravity="top|left"
-        android:hint="Enter your A"
+        android:hint="Enter your Answer"
         android:inputType="textPersonName"
         android:textColor="#000000"
         android:textColorHint="#000000"

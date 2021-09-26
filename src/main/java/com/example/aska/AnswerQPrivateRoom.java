@@ -84,7 +84,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                 boolean CheckProfession= (TheQOfLocationCardProfession.equals(UserProfession))||(TheQOfLocationCardProfession.equals("None"));
                 if((TheAOfLocationCard.equals("0")&&(CheckHobby)&&(CheckProfession))){
                     TheQuestion.setText(TheQOfLocationCard);
-                    LocationView.setText(QLocation);
+                    LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
                     cashView.setText(UserCash);
                     SendA.setEnabled(true);
                     TheAnswerOfQ.clearFocus();
@@ -99,6 +99,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                     TheAnswerOfQ.clearFocus();
                     TheAnswerOfQ.setText("");
                 }
+                AllowSend();
             }
         });
 
@@ -114,7 +115,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                     RandomQ();
                     TheQuestion.setText(TheQOfLocationCard);
                     cashView.setText(UserCash);
-                    LocationView.setText(QLocation);
+                    LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
                     TheAnswerOfQ.clearFocus();
                     TheAnswerOfQ.setText("");
                     Reload.performClick();
@@ -127,6 +128,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                         getValueOfRoom(myRef);
                     }
                 }
+                DisAllowSend();
             }
         });
 
@@ -152,7 +154,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                     getValueOfOtherUser(myRef);
 
                     int c = Integer.parseInt(UserCash);
-                    int c2 = c + 2;
+                    int c2 = c + 1;
                     myRef = database.getReference("Users").child(UserId).child("cash");
                     myRef.setValue(String.valueOf(c2));
                     cashView.setText(String.valueOf(c2));
@@ -329,7 +331,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
 
         if((TheAOfLocationCard.equals("0"))){
             TheQuestion.setText(TheQOfLocationCard);
-            LocationView.setText(QLocation);
+            LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
             cashView.setText(UserCash);
             SendA.setEnabled(true);
             myRef = database.getReference("Users").child(UserIdOfSenderLocationCard);
@@ -394,6 +396,23 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
             }
         };
         DatabaseGetValue.addValueEventListener(postListener);
+    }
+
+    public void AllowSend(){
+        Button nextBtn = findViewById(R.id.nextQBtnPrivateRoom);
+        Button SendA = findViewById(R.id.SendABtnPrivateRoom);
+        Button Reload = findViewById(R.id.ReloadAnswerQPrivateRoom);
+        nextBtn.setEnabled(true);
+        SendA.setEnabled(true);
+        Reload.setEnabled(false);
+    }
+    public void DisAllowSend(){
+        Button nextBtn = findViewById(R.id.nextQBtnPrivateRoom);
+        Button SendA = findViewById(R.id.SendABtnPrivateRoom);
+        Button Reload = findViewById(R.id.ReloadAnswerQPrivateRoom);
+        nextBtn.setEnabled(false);
+        SendA.setEnabled(false);
+        Reload.setEnabled(true);
     }
 
 }

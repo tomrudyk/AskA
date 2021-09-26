@@ -76,6 +76,8 @@ public class MyInfo extends AppCompatActivity {
     private UserLikes OtherUserLikes;private String OtherUserLikedByWhom; String OtherUserLikeCount;
     private UserLikes ControllingUserLikes;private String ControllingUserLikedByWhom; String ControllingUserLikeCount;
 
+    private boolean FromBack=false; private boolean FromNext=false;
+
 
 
     @Override
@@ -90,6 +92,7 @@ public class MyInfo extends AppCompatActivity {
         Button reSendBtn = findViewById(R.id.reSendBtn);
         Button ReportAns = findViewById(R.id.ReportAns);
         Button UserLikeBtn = findViewById(R.id.LikeBtn);
+        UserLikeBtn.setVisibility(View.GONE); // Hides Like Btn
         TextView TheQ = findViewById(R.id.UserQ);
         TextView TheA = findViewById(R.id.UserA);
         TextView cashView = findViewById(R.id.cashView);
@@ -116,6 +119,8 @@ public class MyInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cashView.setText(StringCashOfController);
+                FromNext=true;
+                FromBack=false;
                 for (int i=-1;i<4;i++){
                     if (i==QuestionNumView){
                         TheQ.setText(UserQuestions[i+1]);
@@ -135,7 +140,12 @@ public class MyInfo extends AppCompatActivity {
                             TheA.setText(UserAnswers[i+1]);
                             reSendBtn.setEnabled(true);
                             ReportAns.setEnabled(true);
-                            //UserLikeBtn.setEnabled(true);
+                            myRef = database.getReference("Users").child(String.valueOf(UserIdOfAnswer));
+                            /*if(!String.valueOf(UserIdOfAnswer).equals("null")&&UserIdOfAnswer!=null){
+                                Toast.makeText(MyInfo.this, String.valueOf(UserIdOfAnswer), Toast.LENGTH_SHORT).show();
+                                //getValueOfUser(myRef);
+                            }
+                            UserLikeBtn.setEnabled(true); */ //UserLike Thing -- Doesn't Work
                         }
                         if(UserQuestions[i+1].equals("0")){
                             TheQ.setText("-Not Sent Yet-");
@@ -158,6 +168,8 @@ public class MyInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cashView.setText(StringCashOfController);
+                FromNext=false;
+                FromBack=true;
                 for (int i=1;i<6;i++){
                     if (i==QuestionNumView){
                         TheQ.setText(UserQuestions[i-1]);
@@ -177,7 +189,12 @@ public class MyInfo extends AppCompatActivity {
                             TheA.setText(UserAnswers[i-1]);
                             reSendBtn.setEnabled(true);
                             ReportAns.setEnabled(true);
-                            //UserLikeBtn.setEnabled(true);
+                            myRef = database.getReference("Users").child(String.valueOf(UserIdOfAnswer));
+                            /*if(!String.valueOf(UserIdOfAnswer).equals("null")&&UserIdOfAnswer!=null){
+                                Toast.makeText(MyInfo.this, String.valueOf(UserIdOfAnswer), Toast.LENGTH_SHORT).show();
+                                //getValueOfUser(myRef);
+                            }
+                            UserLikeBtn.setEnabled(true); */ //UserLike Thing -- Doesn't Work
                         }
                         if(UserQuestions[i-1].equals("0")){
                             TheQ.setText("-Not Sent Yet-");
@@ -451,7 +468,7 @@ public class MyInfo extends AppCompatActivity {
                     TheUserQ4 = userInfo.getQnum4();
                     TheUserQ5 = userInfo.getQnum5();
                     StringCash = userInfo.getCash();
-                    Q1 = TheUserQ1.getUserQ();
+                    Q1 = String.valueOf(TheUserQ1.getUserQ());
                     A1 = TheUserQ1.getUserA();
                     Q2 = TheUserQ2.getUserQ();
                     A2 = TheUserQ2.getUserA();

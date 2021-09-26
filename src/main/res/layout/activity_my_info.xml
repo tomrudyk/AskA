@@ -80,8 +80,8 @@
         android:layout_width="125dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="next Q"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UserA" />
@@ -90,10 +90,10 @@
         android:id="@+id/backBtn"
         android:layout_width="125dp"
         android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="28dp"
         android:text="Previous Q"
-        app:layout_constraintEnd_toStartOf="@+id/nextBtn"
-        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UserA" />
 
@@ -125,11 +125,14 @@
         android:id="@+id/ReportAns"
         android:layout_width="110dp"
         android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         android:text="report A"
         app:layout_constraintEnd_toStartOf="@+id/reSendBtn"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nextBtn" />
 
     <Button

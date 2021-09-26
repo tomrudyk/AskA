@@ -172,7 +172,7 @@ public class SendQuestionPrivateRoom extends AppCompatActivity {
                     getValueOfUser(myRef);
                     if (StringCash != null) {
                         int c = Integer.parseInt(StringCash);
-                        int c2 = c - 3;
+                        int c2 = c - 2;
                         myRef = database.getReference("Users").child(UserId).child("cash");
                         myRef.setValue(String.valueOf(c2));
                     }

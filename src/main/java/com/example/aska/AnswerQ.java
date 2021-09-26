@@ -98,6 +98,9 @@ public class AnswerQ extends AppCompatActivity {
                     TheQuestion.setText("No Q Found -");
                     LocationView.setText("No Q Found -");
                 }
+                TheAnswerOfQ.clearFocus();
+                TheAnswerOfQ.setText("");
+                AllowSend();
             }
         });
 
@@ -118,6 +121,7 @@ public class AnswerQ extends AppCompatActivity {
                 TheAnswerOfQ.clearFocus();
                 TheAnswerOfQ.setText("");
                 ReloadQInfo();
+                DisAllowSend();
             }
         });
 
@@ -127,7 +131,7 @@ public class AnswerQ extends AppCompatActivity {
                 String UserAns = TheAnswerOfQ.getText().toString();
                 if(UserAns=="null"||!EmptyFromForbiddenLanguage(UserAns)||UserAns.isEmpty()){
 
-                    Toast.makeText(AnswerQ.this, "Ans Is Empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AnswerQ.this, "Answer Is Empty", Toast.LENGTH_SHORT).show();
 
                 }
                 else{
@@ -143,7 +147,7 @@ public class AnswerQ extends AppCompatActivity {
                     getValueOfOtherUser(myRef);
 
                     int c = Integer.parseInt(UserCash);
-                    int c2 = c + 2;
+                    int c2 = c + 1;
                     myRef = database.getReference("Users").child(UserId).child("cash");
                     myRef.setValue(String.valueOf(c2));
                     cashView.setText(String.valueOf(c2));
@@ -190,13 +194,14 @@ public class AnswerQ extends AppCompatActivity {
                 TheAnswerOfQ.setText("");
                 SendA.setEnabled(false);
                 ReloadQInfo();
+                DisAllowSend();
             }
         });
 
         TheAnswerOfQ.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                ReloadQInfo();
+                //ReloadQInfo();
             }
 
             @Override
@@ -213,6 +218,8 @@ public class AnswerQ extends AppCompatActivity {
 
 
     }
+
+
 
 
     public boolean EmptyFromForbiddenLanguage(String Ans){
@@ -472,6 +479,23 @@ public class AnswerQ extends AppCompatActivity {
             LocationView.setText("No Q Found -");
         }
         Reload.performClick();
+    }
+
+    public void AllowSend(){
+        Button nextBtn = findViewById(R.id.nextQBtnPrivateRoom);
+        Button SendA = findViewById(R.id.SendABtnPrivateRoom);
+        Button Reload = findViewById(R.id.ReloadAnswerQPrivateRoom);
+        nextBtn.setEnabled(true);
+        SendA.setEnabled(true);
+        Reload.setEnabled(false);
+    }
+    public void DisAllowSend(){
+        Button nextBtn = findViewById(R.id.nextQBtnPrivateRoom);
+        Button SendA = findViewById(R.id.SendABtnPrivateRoom);
+        Button Reload = findViewById(R.id.ReloadAnswerQPrivateRoom);
+        nextBtn.setEnabled(false);
+        SendA.setEnabled(false);
+        Reload.setEnabled(true);
     }
 
 }
