@@ -143,7 +143,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="15dp"
-        android:text="Choose a thiered Hobby"
+        android:text="Choose a third Hobby"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ChooseHobbieTxt2" />
 

@@ -386,7 +386,7 @@ public class AnswerQ extends AppCompatActivity {
         }
         Random rd = new Random();
         int RandomInt = rd.nextInt(ChildrenBoth)+1;
-        if(RandomInt<=ChildrenCount){
+        if((RandomInt<=ChildrenCount)){
             IsStateNull=false;
             myRef = database.getReference(UserLocation).child(String.valueOf(RandomInt));
             getValueOfCardLocation(myRef);
@@ -395,10 +395,17 @@ public class AnswerQ extends AppCompatActivity {
         }
         else{
             IsStateNull=true;
-            myRef = database.getReference("null").child(String.valueOf(ChildrenBoth-RandomInt));
-            getValueOfCardLocation(myRef);
-            QLocation="null";
-            NumOfQInState=String.valueOf(ChildrenBoth-RandomInt);
+            if(ChildrenCountNullState==1){
+                myRef = database.getReference("null").child(String.valueOf(1));
+                getValueOfCardLocation(myRef);
+                QLocation = "null";
+                NumOfQInState = String.valueOf(1);
+            }else {
+                myRef = database.getReference("null").child(String.valueOf(ChildrenBoth - RandomInt));
+                getValueOfCardLocation(myRef);
+                QLocation = "null";
+                NumOfQInState = String.valueOf(ChildrenBoth - RandomInt);
+            }
         }
 
         boolean CheckHobby= (TheQOfLocationCardHobby.equals(UserHobby))||(TheQOfLocationCardHobby.equals("None"))

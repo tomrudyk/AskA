@@ -27,6 +27,9 @@
         android:text="TextView"
         android:textColor="#000000"
         android:textSize="24sp"
+        android:inputType="textPersonName|textMultiLine"
+        android:scrollbars="vertical"
+        android:singleLine="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
@@ -68,6 +71,9 @@
         android:text="TextView"
         android:textColor="#000000"
         android:textSize="24sp"
+        android:inputType="textPersonName|textMultiLine"
+        android:scrollbars="vertical"
+        android:singleLine="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
@@ -105,6 +111,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Delete Q"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nextBtn"
@@ -118,6 +125,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="reSend Q"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/deleteBtn"
         app:layout_constraintTop_toBottomOf="@+id/nextBtn" />
 
@@ -131,6 +139,7 @@
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         android:text="report A"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/reSendBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nextBtn" />

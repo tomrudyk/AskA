@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Button SignInBtn = findViewById(R.id.SignInBtn);
         Button CreateAccount = findViewById(R.id.CreateUserBtn);
         Button LogOutBtn = findViewById(R.id.logOutBtn);
+        LogOutBtn.setVisibility(View.GONE); // Hides LogOut Btn
         EditText EmailInp = findViewById(R.id.Email);
         EditText PasswordInp = findViewById(R.id.Password);
         TextView WelcomeTxt = findViewById(R.id.WelcomeTxt);

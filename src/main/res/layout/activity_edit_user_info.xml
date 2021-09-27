@@ -89,7 +89,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
-        android:text="Choose secound Hobby"
+        android:text="Choose third Hobby"
         android:textSize="18sp"
         android:textStyle="normal|bold"
         app:layout_constraintStart_toStartOf="parent"

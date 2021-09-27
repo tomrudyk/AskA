@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LocationToAskList" />
+        app:layout_constraintTop_toBottomOf="@+id/Professiontoask" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/Professiontoask"
@@ -41,30 +41,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Hobbytoask" />
+        app:layout_constraintTop_toBottomOf="@+id/LocationToAskList" />
 
     <EditText
         android:id="@+id/TheQ"
         android:layout_width="390dp"
         android:layout_height="168dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="Enter Q"
-        android:inputType="textPersonName"
+        android:hint="Enter Question"
+        android:inputType="textPersonName|textMultiLine"
+        android:scrollbars="vertical"
+        android:singleLine="false"
         android:textColor="#000000"
         android:textColorHint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Professiontoask" />
+        app:layout_constraintTop_toBottomOf="@+id/Hobbytoask" />
 
     <Button
         android:id="@+id/SendQ"
         android:layout_width="180dp"
         android:layout_height="67dp"
         android:layout_marginTop="28dp"
-        android:text="Send Q"
-        android:textSize="18sp"
+        android:text="Send Question"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,16 +74,17 @@
 
     <Button
         android:id="@+id/GoToAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="159dp"
+        android:layout_height="51dp"
         android:layout_marginTop="12dp"
-        android:text="Go To Answer Q"
+        android:text="Go To Answer Questions"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PersonalInfo"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/PersonalInfo"
@@ -96,17 +99,17 @@
 
     <Button
         android:id="@+id/PrivateRooms"
-        android:layout_width="177dp"
-        android:layout_height="46dp"
+        android:layout_width="163dp"
+        android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginTop="12dp"
         android:text="Private Rooms"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/PersonalInfo"
-        app:layout_constraintHorizontal_bias="0.017"
+        app:layout_constraintEnd_toStartOf="@+id/GoToAnswer"
+        app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SendQ"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/PersonalInfo"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

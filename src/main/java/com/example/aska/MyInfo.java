@@ -75,6 +75,7 @@ public class MyInfo extends AppCompatActivity {
 
     private UserLikes OtherUserLikes;private String OtherUserLikedByWhom; String OtherUserLikeCount;
     private UserLikes ControllingUserLikes;private String ControllingUserLikedByWhom; String ControllingUserLikeCount;
+    private String RoomsString="";
 
     private boolean FromBack=false; private boolean FromNext=false;
 
@@ -113,6 +114,8 @@ public class MyInfo extends AppCompatActivity {
         myRef = database.getReference("Users").child(UserId);
         getValueOfUser(myRef);
         getValueOfUserControl(myRef);
+        myRef = database.getReference("Rooms").child("RoomsString");
+        getValueOfRoomsCodeString(myRef);
 
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +124,8 @@ public class MyInfo extends AppCompatActivity {
                 cashView.setText(StringCashOfController);
                 FromNext=true;
                 FromBack=false;
+                myRef = database.getReference("Rooms").child("RoomsString");
+                getValueOfRoomsCodeString(myRef);
                 for (int i=-1;i<4;i++){
                     if (i==QuestionNumView){
                         TheQ.setText(UserQuestions[i+1]);
@@ -139,7 +144,11 @@ public class MyInfo extends AppCompatActivity {
                         else {
                             TheA.setText(UserAnswers[i+1]);
                             reSendBtn.setEnabled(true);
-                            ReportAns.setEnabled(true);
+                            if(RoomsString.contains(LocationsOfQUser[i+1])) {
+                                ReportAns.setEnabled(false);
+                            }else{
+                                ReportAns.setEnabled(true);
+                            }
                             myRef = database.getReference("Users").child(String.valueOf(UserIdOfAnswer));
                             /*if(!String.valueOf(UserIdOfAnswer).equals("null")&&UserIdOfAnswer!=null){
                                 Toast.makeText(MyInfo.this, String.valueOf(UserIdOfAnswer), Toast.LENGTH_SHORT).show();
@@ -170,6 +179,8 @@ public class MyInfo extends AppCompatActivity {
                 cashView.setText(StringCashOfController);
                 FromNext=false;
                 FromBack=true;
+                myRef = database.getReference("Rooms").child("RoomsString");
+                getValueOfRoomsCodeString(myRef);
                 for (int i=1;i<6;i++){
                     if (i==QuestionNumView){
                         TheQ.setText(UserQuestions[i-1]);
@@ -188,7 +199,11 @@ public class MyInfo extends AppCompatActivity {
                         else {
                             TheA.setText(UserAnswers[i-1]);
                             reSendBtn.setEnabled(true);
-                            ReportAns.setEnabled(true);
+                            if(RoomsString.contains(LocationsOfQUser[i-1])) {
+                                ReportAns.setEnabled(false);
+                            }else{
+                                ReportAns.setEnabled(true);
+                            }
                             myRef = database.getReference("Users").child(String.valueOf(UserIdOfAnswer));
                             /*if(!String.valueOf(UserIdOfAnswer).equals("null")&&UserIdOfAnswer!=null){
                                 Toast.makeText(MyInfo.this, String.valueOf(UserIdOfAnswer), Toast.LENGTH_SHORT).show();
@@ -304,6 +319,8 @@ public class MyInfo extends AppCompatActivity {
             public void onClick(View v) {
                     myRef = database.getReference("Users").child(UserId);
                     getValueOfUserControl(myRef);
+                    myRef = database.getReference("Rooms").child("RoomsString");
+                    getValueOfRoomsCodeString(myRef);
                     String Location="";
                     String NumInState="";
                     if(QuestionNumView==0){
@@ -357,8 +374,13 @@ public class MyInfo extends AppCompatActivity {
                         TheQOfLocationCardProfession=String.valueOf(QProfession5);
                     }
                     LocationCard CardUpdate= new LocationCard(TheQOfLocationCard,"0",UserId,"0",TheQOfLocationCardHobby,TheQOfLocationCardProfession);
-                    myRef = database.getReference(Location).child(NumInState);
-                    myRef.setValue(CardUpdate);
+                    if(!RoomsString.contains(Location)) {
+                        myRef = database.getReference(Location).child(NumInState);
+                        myRef.setValue(CardUpdate);
+                    }else{
+                        myRef = database.getReference("Rooms").child(Location).child(NumInState);
+                        myRef.setValue(CardUpdate);
+                    }
 
                     myRef = database.getReference("Users").child(UserId);
                     getValueOfUserControl(myRef);
@@ -766,6 +788,30 @@ public class MyInfo extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void getValueOfRoomsCodeString(DatabaseReference DatabaseGetValue){
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String RoomsLongString = dataSnapshot.getValue(String.class);
+                if (RoomsLongString==null){
+                    getValueOfRoomsCodeString(DatabaseGetValue);
+                }
+                else{
+                    RoomsString = (RoomsLongString);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        DatabaseGetValue.addValueEventListener(postListener);
+    }
+
 
 
 }

@@ -175,7 +175,11 @@ public class CreateUserPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                if(!UserCountry.equals("null")&&!UserHobby.equals("None")&&!UserHobby2.equals("None")&&!UserHobby3.equals("None")&&!UserProfession.equals("None")) {
-                   createAccount(EmailInp.getText().toString(), PasswordInp.getText().toString());
+                   if(EmailInp.getText().toString().contains("@gmail.com")) {
+                       createAccount(EmailInp.getText().toString(), PasswordInp.getText().toString());
+                   }else{
+                       Toast.makeText(CreateUserPage.this, " Please Enter A Gmail Mail ", Toast.LENGTH_SHORT).show();
+                   }
                }
                else{
                    Toast.makeText(CreateUserPage.this, " One Of The Above Is Empty ", Toast.LENGTH_SHORT).show();

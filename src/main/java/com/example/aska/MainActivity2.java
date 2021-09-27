@@ -126,6 +126,12 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
+         myRef = database.getReference(LocationToAsk+LocationToAsk);
+         getValueOfState(myRef);
+         ChildrenCount=0;
+         myRef = database.getReference("Users").child(UserId);
+         getValueOfUser(myRef);
+
 
         GotoAnswerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,11 +168,11 @@ public class MainActivity2 extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                myRef = database.getReference(LocationToAsk+LocationToAsk);
-                getValueOfState(myRef);
-                ChildrenCount=0;
-                myRef = database.getReference("Users").child(UserId);
-                getValueOfUser(myRef);
+               // myRef = database.getReference(LocationToAsk+LocationToAsk);
+               // getValueOfState(myRef);
+               // ChildrenCount=0;
+              //  myRef = database.getReference("Users").child(UserId);
+               // getValueOfUser(myRef);
 
             }
 
