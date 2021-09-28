@@ -87,7 +87,6 @@
     </string-array>
 
 
-
     <string-array name="ForbiddenLanguage">
         <item>fuck</item>
         <item>Suck</item>
@@ -101,9 +100,6 @@
         <item>motherfucker</item>
         <item>motherfucker</item>
     </string-array>
-
-
-
 
 
     <string-array name="Hobbies">
@@ -147,13 +143,6 @@
         <item>Yoga</item>
 
     </string-array>
-
-
-
-
-
-
-
 
 
     <string-array name="Professions">

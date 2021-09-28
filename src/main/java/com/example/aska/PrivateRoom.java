@@ -109,7 +109,12 @@ public class PrivateRoom extends AppCompatActivity {
         GoToAnswerYourRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeActivityAnswerQToPrivateRoom();
+                if(UserRoomCode!=null&&!UserRoomCode.equals("0")) {
+                    changeActivityAnswerQToPrivateRoom();
+                }
+                else{
+                    Toast.makeText(PrivateRoom.this, "You don't own a private room", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

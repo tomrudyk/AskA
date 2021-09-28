@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         LogOutBtn.setVisibility(View.GONE); // Hides LogOut Btn
         EditText EmailInp = findViewById(R.id.Email);
         EditText PasswordInp = findViewById(R.id.Password);
-        TextView WelcomeTxt = findViewById(R.id.WelcomeTxt);
+
         TextView ForgotPass = findViewById(R.id.ForgotPassTxt);
 
         ForgotPass.setOnClickListener(new View.OnClickListener() {
@@ -110,11 +110,9 @@ public class MainActivity extends AppCompatActivity {
                     UserId=mAuth.getCurrentUser().getUid();
                     myRef = database.getReference("Users").child(UserId);
                     getValueOfUser(myRef);
-                    WelcomeTxt.setText(mAuth.getCurrentUser().getEmail());
+
                 }
-                else{
-                    WelcomeTxt.setText("No User Found");
-                }
+
 
             }
         });
@@ -150,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(MainActivity.this, "LogOut Successfully", Toast.LENGTH_SHORT).show();
-                WelcomeTxt.setText("Welcome");
             }
         });
     }

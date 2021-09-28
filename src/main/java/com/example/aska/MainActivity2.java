@@ -71,6 +71,7 @@ public class MainActivity2 extends AppCompatActivity {
         Button PersonalInfoBtn = findViewById(R.id.PersonalInfo);
         Button SendQ = findViewById(R.id.SendQ);
         Button PrivateRooms = findViewById(R.id.PrivateRooms);
+        Button GoToInfoOfApp = findViewById(R.id.GetInfoBtn);
         EditText TheQ = findViewById(R.id.TheQ);
 
         QuestionEditor("0", "0", UserId); /// The First Q is Always not working - that way it will not work and user won't notice
@@ -185,6 +186,13 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 changeActivity3();
+            }
+        });
+
+        GoToInfoOfApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeActivityToGetInfoOfApp();
             }
         });
 
@@ -394,6 +402,11 @@ public class MainActivity2 extends AppCompatActivity {
 
     public void changeActivityIfBanned() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void changeActivityToGetInfoOfApp(){
+        Intent intent = new Intent(this, WelcomePageMessageOnCreate.class);
         startActivity(intent);
     }
 

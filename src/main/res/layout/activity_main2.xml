@@ -7,40 +7,68 @@
     tools:context=".MainActivity"
     android:background="@drawable/ic_bgcolor">
 
+    <TextView
+        android:id="@+id/ChooseProfessionToAskTxt"
+        android:layout_width="160dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center|left"
+        android:text="Choose Profession:"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChooseLocationToAskTxt" />
+
+    <TextView
+        android:id="@+id/ChooseHobbyToAskTxt"
+        android:layout_width="160dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center|left"
+        android:text="Choose Hobby:"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ChooseProfessionToAskTxt" />
+
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/LocationToAskList"
-        android:layout_width="362dp"
+        android:layout_width="231dp"
         android:layout_height="62dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ChooseLocationToAskTxt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/Hobbytoask"
-        android:layout_width="362dp"
+        android:layout_width="231dp"
         android:layout_height="62dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ChooseHobbyToAskTxt"
         app:layout_constraintTop_toBottomOf="@+id/Professiontoask" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/Professiontoask"
-        android:layout_width="362dp"
+        android:layout_width="231dp"
         android:layout_height="62dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dialog"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ChooseProfessionToAskTxt"
         app:layout_constraintTop_toBottomOf="@+id/LocationToAskList" />
 
     <EditText
@@ -90,17 +118,17 @@
         android:id="@+id/PersonalInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="12dp"
         android:text="My Info"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SendQ" />
+        app:layout_constraintTop_toBottomOf="@+id/GetInfoBtn" />
 
     <Button
         android:id="@+id/PrivateRooms"
-        android:layout_width="163dp"
-        android:layout_height="47dp"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="12dp"
@@ -111,5 +139,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PersonalInfo"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/GetInfoBtn"
+        android:layout_width="64dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="56dp"
+        android:text="Button"
+        app:icon="@android:drawable/ic_dialog_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SendQ" />
+
+    <TextView
+        android:id="@+id/ChooseLocationToAskTxt"
+        android:layout_width="160dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center|left"
+        android:text="Choose Location:"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

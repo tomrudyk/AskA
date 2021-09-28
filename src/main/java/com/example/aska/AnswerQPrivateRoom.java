@@ -84,7 +84,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                 boolean CheckProfession= (TheQOfLocationCardProfession.equals(UserProfession))||(TheQOfLocationCardProfession.equals("None"));
                 if((TheAOfLocationCard.equals("0")&&(CheckHobby)&&(CheckProfession))){
                     TheQuestion.setText(TheQOfLocationCard);
-                    LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
+                    LocationView.setText("Location- "+ QLocation+"\n"+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
                     cashView.setText(UserCash);
                     SendA.setEnabled(true);
                     TheAnswerOfQ.clearFocus();
@@ -115,7 +115,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                     RandomQ();
                     TheQuestion.setText(TheQOfLocationCard);
                     cashView.setText(UserCash);
-                    LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
+                    LocationView.setText("Location- "+ QLocation+"\n"+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
                     TheAnswerOfQ.clearFocus();
                     TheAnswerOfQ.setText("");
                     Reload.performClick();
@@ -331,7 +331,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
 
         if((TheAOfLocationCard.equals("0"))){
             TheQuestion.setText(TheQOfLocationCard);
-            LocationView.setText("Location- "+ QLocation+"\n"+"Hobby- " + TheQOfLocationCardHobby+"\n"+"Profession- " + TheQOfLocationCardProfession+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
+            LocationView.setText("Location- "+ QLocation+"\n"+"\n"+"Number Of Questions- " + String.valueOf(ChildrenCount));
             cashView.setText(UserCash);
             SendA.setEnabled(true);
             myRef = database.getReference("Users").child(UserIdOfSenderLocationCard);

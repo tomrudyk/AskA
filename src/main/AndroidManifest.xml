@@ -15,9 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AskA">
-        <activity android:name=".AnswerQPrivateRoom"></activity>
+        <activity android:name=".AnswerQPrivateRoom" />
         <activity android:name=".SendQuestionPrivateRoom" />
-        <activity android:name=".PrivateRoom" />
+        <activity android:name=".PrivateRoom"
+            android:windowSoftInputMode="adjustPan"
+        />
         <activity android:name=".EditUserInfo" />
         <activity android:name=".CreateUserPage" />
         <activity android:name=".WelcomePageMessageOnCreate" />
