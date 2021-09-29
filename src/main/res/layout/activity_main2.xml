@@ -133,6 +133,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="12dp"
         android:text="Private Rooms"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/GoToAnswer"
         app:layout_constraintHorizontal_bias="0.222"

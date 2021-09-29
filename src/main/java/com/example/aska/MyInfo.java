@@ -75,7 +75,7 @@ public class MyInfo extends AppCompatActivity {
 
     private UserLikes OtherUserLikes;private String OtherUserLikedByWhom; String OtherUserLikeCount;
     private UserLikes ControllingUserLikes;private String ControllingUserLikedByWhom; String ControllingUserLikeCount;
-    private String RoomsString="";
+    private String RoomsString=""; private String UserAllowWrite; private String OtherUserAllowWrite;
 
     private boolean FromBack=false; private boolean FromNext=false;
 
@@ -116,11 +116,13 @@ public class MyInfo extends AppCompatActivity {
         getValueOfUserControl(myRef);
         myRef = database.getReference("Rooms").child("RoomsString");
         getValueOfRoomsCodeString(myRef);
+        AllowToWrite();
 
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 cashView.setText(StringCashOfController);
                 FromNext=true;
                 FromBack=false;
@@ -232,6 +234,7 @@ public class MyInfo extends AppCompatActivity {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                 myRef = database.getReference("Users").child(UserId);
                 getValueOfUserControl(myRef);
                 String Location="";
@@ -239,31 +242,31 @@ public class MyInfo extends AppCompatActivity {
                 TheQOfUser TheQ2 = new TheQOfUser("0","0","0","0","0","0");
                 if(QuestionNumView==0){
                     UserInfoEdit(TheQ2,TheUserQ2,TheUserQ3,TheUserQ4,TheUserQ5,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                     Location = Q1Location;
                     NumInState=NumInState1;
                 }
                 if(QuestionNumView==1){
                     UserInfoEdit(TheUserQ1,TheQ2,TheUserQ3,TheUserQ4,TheUserQ5,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                     Location = Q2Location;
                     NumInState=NumInState2;
                 }
                 if(QuestionNumView==2){
                     UserInfoEdit(TheUserQ1,TheUserQ2,TheQ2,TheUserQ4,TheUserQ5,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                     Location = Q3Location;
                     NumInState=NumInState3;
                 }
                 if(QuestionNumView==3){
                     UserInfoEdit(TheUserQ1,TheUserQ2,TheUserQ3,TheQ2,TheUserQ5,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                     Location = Q4Location;
                     NumInState=NumInState4;
                 }
                 if(QuestionNumView==4){
                     UserInfoEdit(TheUserQ1,TheUserQ2,TheUserQ3,TheUserQ4,TheQ2,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                            ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                     Location = Q5Location;
                     NumInState=NumInState5;
                 }
@@ -317,6 +320,7 @@ public class MyInfo extends AppCompatActivity {
         reSendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                     myRef = database.getReference("Users").child(UserId);
                     getValueOfUserControl(myRef);
                     myRef = database.getReference("Rooms").child("RoomsString");
@@ -326,7 +330,7 @@ public class MyInfo extends AppCompatActivity {
                     if(QuestionNumView==0){
                         TheQOfUser TheQ2 = new TheQOfUser(Q1,"0",Q1Location,NumInState1,QHobby1,QProfession1);
                         UserInfoEdit(TheQ2,TheUserQ2,TheUserQ3,TheUserQ4,TheUserQ5,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                         Location = Q1Location;
                         NumInState=String.valueOf(NumInState1);
                         TheQOfLocationCard=String.valueOf(Q1);
@@ -336,7 +340,7 @@ public class MyInfo extends AppCompatActivity {
                     if(QuestionNumView==1){
                         TheQOfUser TheQ2 = new TheQOfUser(Q2,"0",Q2Location,NumInState2,QHobby2,QProfession2);
                         UserInfoEdit(TheUserQ1,TheQ2,TheUserQ3,TheUserQ4,TheUserQ5,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                         Location = Q2Location;
                         NumInState=String.valueOf(NumInState2);
                         TheQOfLocationCard=String.valueOf(Q2);
@@ -346,7 +350,7 @@ public class MyInfo extends AppCompatActivity {
                     if(QuestionNumView==2){
                         TheQOfUser TheQ2 = new TheQOfUser(Q3,"0",Q3Location,NumInState3,QHobby3,QProfession3);
                         UserInfoEdit(TheUserQ1,TheUserQ2,TheQ2,TheUserQ4,TheUserQ5,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                         Location = Q3Location;
                         NumInState=String.valueOf(NumInState3);
                         TheQOfLocationCard=String.valueOf(Q3);
@@ -356,7 +360,7 @@ public class MyInfo extends AppCompatActivity {
                     if(QuestionNumView==3){
                         TheQOfUser TheQ2 = new TheQOfUser(Q4,"0",Q4Location,NumInState4,QHobby4,QProfession4);
                         UserInfoEdit(TheUserQ1,TheUserQ2,TheUserQ3,TheQ2,TheUserQ5,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                         Location = Q4Location;
                         NumInState=String.valueOf(NumInState4);
                         TheQOfLocationCard=String.valueOf(Q4);
@@ -366,7 +370,7 @@ public class MyInfo extends AppCompatActivity {
                     if(QuestionNumView==4){
                         TheQOfUser TheQ2 = new TheQOfUser(Q5,"0",Q5Location,NumInState5,QHobby5,QProfession5);
                         UserInfoEdit(TheUserQ1,TheUserQ2,TheUserQ3,TheUserQ4,TheQ2,StringCash,UserLocation,ReportSent,ReportGot,UserId,UserHobby,UserHobby2,UserHobby3,UserProfession
-                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                                ,UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                         Location = Q5Location;
                         NumInState=String.valueOf(NumInState5);
                         TheQOfLocationCard=String.valueOf(Q5);
@@ -399,6 +403,7 @@ public class MyInfo extends AppCompatActivity {
 
         ReportAns.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                AllowToWrite();
                 if ((UserId != null && UserIdOfAnswer != null) && (!UserId.isEmpty() && !UserIdOfAnswer.isEmpty()) && (!UserIdOfAnswer.equals(UserId))) {
                     myRef = database.getReference("Users").child(UserIdOfAnswer);
                     getValueOfUser(myRef);
@@ -422,7 +427,7 @@ public class MyInfo extends AppCompatActivity {
 
                             }
                             UserInfoEdit(TheUserQ1, TheUserQ2, TheUserQ3, TheUserQ4, TheUserQ5, StringCash, UserLocation, ReportSent, ReportGot, UserIdOfAnswer, UserHobby, UserHobby2,UserHobby3, UserProfession
-                                    , UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes);
+                                    , UserReportsTime, OtherUserRoomCode, OtherUserRoomsJoined, OtherUserLikes,OtherUserAllowWrite);
                             int a2 = Integer.parseInt(ReportSentOfController) + 1;
                             ReportSentOfController = String.valueOf(a2);
                             Date newLastReportTime = Calendar.getInstance().getTime();
@@ -433,7 +438,8 @@ public class MyInfo extends AppCompatActivity {
                             ControllerReportsTime.setSumReportSendToday(String.valueOf(sumOfReportsSendToday));
                             UserInfoEdit(TheUserQ1Controller, TheUserQ2Controller, TheUserQ3Controller, TheUserQ4Controller, TheUserQ5Controller,
                                     StringCashOfController, UserLocationOfController, ReportSentOfController, ReportGotOfController,
-                                    UserId, UserControllerHobby, UserControllerHobby2,UserControllerHobby3, UserControllerProfession, ControllerReportsTime, UserControllingRoomCode, UserControllingRoomsJoined,ControllingUserLikes);
+                                    UserId, UserControllerHobby, UserControllerHobby2,UserControllerHobby3, UserControllerProfession, ControllerReportsTime,
+                                    UserControllingRoomCode, UserControllingRoomsJoined,ControllingUserLikes,UserAllowWrite);
                         } else {
                             if (UserId.equals(UserIdOfAnswer)) {
                                 Toast.makeText(MyInfo.this, "You Can't Report your own Ans", Toast.LENGTH_SHORT).show();
@@ -463,6 +469,7 @@ public class MyInfo extends AppCompatActivity {
         UserLikeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                 if(!OtherUserLikedByWhom.contains(UserId)) {
                     OtherUserLikeCount = String.valueOf(Integer.valueOf(OtherUserLikeCount) + 1);
                     OtherUserLikedByWhom = OtherUserLikedByWhom + UserId;
@@ -477,6 +484,21 @@ public class MyInfo extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        DisAllowToWrite();
+    }
+    public void onPause() {
+        super.onPause();
+        DisAllowToWrite();
+    }
+    public void onResume() {
+        super.onResume();
+        AllowToWrite();
+    }
+
+
 
     public void getValueOfUser(DatabaseReference DatabaseGetValue){
         ValueEventListener postListener = new ValueEventListener() {
@@ -518,6 +540,7 @@ public class MyInfo extends AppCompatActivity {
                     OtherUserLikes = userInfo.getUserLikes();
                     OtherUserLikedByWhom = OtherUserLikes.getLikedByWhom();
                     OtherUserLikeCount = OtherUserLikes.getLikesGot();
+                    OtherUserAllowWrite=userInfo.getAllowWrite();
                 }
 
             }
@@ -586,6 +609,7 @@ public class MyInfo extends AppCompatActivity {
                 ControllingUserLikes = userInfo.getUserLikes();
                 ControllingUserLikedByWhom = ControllingUserLikes.getLikedByWhom();
                 ControllingUserLikeCount = ControllingUserLikes.getLikesGot();
+                UserAllowWrite = userInfo.getAllowWrite();
 
 
             }
@@ -654,8 +678,10 @@ public class MyInfo extends AppCompatActivity {
     }
 
     public void UserInfoEdit(TheQOfUser TheQ1,TheQOfUser TheQ2,TheQOfUser TheQ3,TheQOfUser TheQ4,TheQOfUser TheQ5,String Cash,String location, String reportSent,
-                             String reportGot,String UserIdEdit, String Hobby,String Hobby2,String Hobby3,String Profession,ReportsTime reportsTime, String roomCode, String usersRooms,UserLikes userLikes){
-        UserInfo userInfo = new UserInfo(TheQ1,TheQ2,TheQ3,TheQ4,TheQ5,Cash,location,reportSent,reportGot,Hobby,Hobby2,Hobby3,Profession,reportsTime, roomCode, usersRooms,userLikes);
+                             String reportGot,String UserIdEdit, String Hobby,String Hobby2,String Hobby3,String Profession,ReportsTime reportsTime,
+                             String roomCode, String usersRooms,UserLikes userLikes, String AllowWrite){
+        AllowToWrite();
+        UserInfo userInfo = new UserInfo(TheQ1,TheQ2,TheQ3,TheQ4,TheQ5,Cash,location,reportSent,reportGot,Hobby,Hobby2,Hobby3,Profession,reportsTime, roomCode, usersRooms,userLikes,AllowWrite);
         myRef = database.getReference("Users").child(UserIdEdit);
         myRef.setValue(userInfo);
     }
@@ -810,6 +836,17 @@ public class MyInfo extends AppCompatActivity {
             }
         };
         DatabaseGetValue.addValueEventListener(postListener);
+    }
+
+    public void AllowToWrite(){
+        UserAllowWrite = "true";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
+    }
+    public void DisAllowToWrite(){
+        UserAllowWrite = "false";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
     }
 
 

@@ -32,12 +32,15 @@ public class EditUserInfo extends AppCompatActivity {
     private String ReportGot;private String ReportSent;private String UserLocation;
     private Spinner DialogHobbyToAsk;private Spinner DialogProfessionToAsk;private Spinner DialogHobbyToAsk2;private Spinner DialogHobbyToAsk3;
     private String HobbyChange;private String ProfessionChange;private String HobbyChange2;private String HobbyChange3;
+    private String UserAllowWrite;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user_info);
+
+        DisAllowToWrite();
 
         TextView CurHobby = findViewById(R.id.CurHobby);
         TextView CurProfession = findViewById(R.id.CurProffesion);
@@ -120,6 +123,7 @@ public class EditUserInfo extends AppCompatActivity {
         Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                 if(!HobbyChange.equals("None")&&!HobbyChange2.equals("None")&&!HobbyChange3.equals("None")&&!ProfessionChange.equals("None")){
                     myRef = database.getReference("Users").child(UserId).child("hobby");
                     myRef.setValue(HobbyChange);
@@ -138,6 +142,7 @@ public class EditUserInfo extends AppCompatActivity {
                 else{
                     Toast.makeText(EditUserInfo.this, "Please Fill All From Above", Toast.LENGTH_SHORT).show();
                 }
+                DisAllowToWrite();
 
             }
         });
@@ -168,6 +173,7 @@ public class EditUserInfo extends AppCompatActivity {
                 UserHobby2=userInfo.getHobby2();
                 UserHobby3=userInfo.getHobby3();
                 UserProfession=userInfo.getProfession();
+                UserAllowWrite = userInfo.getAllowWrite();
 
             }
 
@@ -178,5 +184,17 @@ public class EditUserInfo extends AppCompatActivity {
             }
         };
         DatabaseGetValue.addValueEventListener(postListener);
+    }
+
+
+    public void AllowToWrite(){
+        UserAllowWrite = "true";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
+    }
+    public void DisAllowToWrite(){
+        UserAllowWrite = "false";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
     }
 }

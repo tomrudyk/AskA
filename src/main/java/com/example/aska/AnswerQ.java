@@ -48,6 +48,7 @@ public class AnswerQ extends AppCompatActivity {
     private String A4="";private String A5="";
     private String OtherUserCash = "";private String OtherUserLocation;
     private ReportsTime ControllerReportsTime;
+    private String UserAllowWrite;
 
 
 
@@ -73,6 +74,8 @@ public class AnswerQ extends AppCompatActivity {
 
         myRef = database.getReference("Users").child(UserId);
         getValueOfUser(myRef);
+
+        DisAllowToWrite();
 
 
         Reload.setOnClickListener(new View.OnClickListener() {
@@ -122,12 +125,14 @@ public class AnswerQ extends AppCompatActivity {
                 TheAnswerOfQ.setText("");
                 ReloadQInfo();
                 DisAllowSend();
+
             }
         });
 
         SendA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                 String UserAns = TheAnswerOfQ.getText().toString();
                 if(UserAns=="null"||!EmptyFromForbiddenLanguage(UserAns)||UserAns.isEmpty()){
 
@@ -195,6 +200,7 @@ public class AnswerQ extends AppCompatActivity {
                 SendA.setEnabled(false);
                 ReloadQInfo();
                 DisAllowSend();
+                DisAllowToWrite();
             }
         });
 
@@ -249,6 +255,7 @@ public class AnswerQ extends AppCompatActivity {
                 if(!CheckIfNotBan){
                     changeActivityIfBanned();
                 }
+                UserAllowWrite=userInfo.getAllowWrite();
 
             }
 
@@ -503,6 +510,17 @@ public class AnswerQ extends AppCompatActivity {
         nextBtn.setEnabled(false);
         SendA.setEnabled(false);
         Reload.setEnabled(true);
+    }
+
+    public void AllowToWrite(){
+        UserAllowWrite = "true";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
+    }
+    public void DisAllowToWrite(){
+        UserAllowWrite = "false";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
     }
 
 }

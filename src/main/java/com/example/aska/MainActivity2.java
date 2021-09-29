@@ -25,6 +25,7 @@ import com.example.aska.MyInfo;
 import com.example.aska.R;
 import com.example.aska.TheQOfUser;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.crashlytics.internal.model.CrashlyticsReport;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,6 +57,7 @@ public class MainActivity2 extends AppCompatActivity {
     private String HobbyToAsk;private String ProfessionToAsk;
     private ReportsTime ControllerReportsTime;
     private String UsersRoomsJoined;
+    private String UserAllowWrite;
 
 
 
@@ -73,6 +75,7 @@ public class MainActivity2 extends AppCompatActivity {
         Button PrivateRooms = findViewById(R.id.PrivateRooms);
         Button GoToInfoOfApp = findViewById(R.id.GetInfoBtn);
         EditText TheQ = findViewById(R.id.TheQ);
+        DisAllowToWrite();
 
         QuestionEditor("0", "0", UserId); /// The First Q is Always not working - that way it will not work and user won't notice
 
@@ -152,11 +155,13 @@ public class MainActivity2 extends AppCompatActivity {
         SendQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                 if(EmptyFromForbiddenLanguage(TheQ.getText().toString().toLowerCase())) {
                     QuestionEditor(TheQ.getText().toString(), "0", UserId);
                     ChildrenCount = 0;
                     TheQ.setText("");
                 }
+                DisAllowToWrite();
 
             }
 
@@ -169,11 +174,11 @@ public class MainActivity2 extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-               // myRef = database.getReference(LocationToAsk+LocationToAsk);
-               // getValueOfState(myRef);
-               // ChildrenCount=0;
-              //  myRef = database.getReference("Users").child(UserId);
-               // getValueOfUser(myRef);
+                myRef = database.getReference(LocationToAsk+LocationToAsk);
+                getValueOfState(myRef);
+                ChildrenCount=0;
+                myRef = database.getReference("Users").child(UserId);
+                getValueOfUser(myRef);
 
             }
 
@@ -321,6 +326,7 @@ public class MainActivity2 extends AppCompatActivity {
                         changeActivityIfBanned();
                     }
                     UsersRoomsJoined=userInfo.getUsersRooms();
+                    UserAllowWrite = userInfo.getAllowWrite();
                 }
 
             }
@@ -408,6 +414,17 @@ public class MainActivity2 extends AppCompatActivity {
     public void changeActivityToGetInfoOfApp(){
         Intent intent = new Intent(this, WelcomePageMessageOnCreate.class);
         startActivity(intent);
+    }
+
+    public void AllowToWrite(){
+        UserAllowWrite = "true";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
+    }
+    public void DisAllowToWrite(){
+        UserAllowWrite = "false";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
     }
 
 

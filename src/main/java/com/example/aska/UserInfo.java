@@ -11,13 +11,15 @@ public class UserInfo {
     public String roomCode;
     public String usersRooms;
     public UserLikes userLikes;
+    public String allowWrite;
 
     public UserInfo() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
     public UserInfo(TheQOfUser Qnum1,TheQOfUser Qnum2,TheQOfUser Qnum3,TheQOfUser Qnum4,TheQOfUser Qnum5, String cash,
-                    String UserLocation,String reportSent,String reportGot,String Hobby,String Hobby2,String Hobby3,String Profession, ReportsTime reportsTime,String RoomCode,String UsersRooms,UserLikes userLikes) {
+                    String UserLocation,String reportSent,String reportGot,String Hobby,String Hobby2,String Hobby3,String Profession, ReportsTime reportsTime,
+                    String RoomCode,String UsersRooms,UserLikes userLikes, String AllowWrite) {
         this.cash = cash;
         this.userLocation = UserLocation;
         this.reportGot = reportGot;
@@ -35,6 +37,7 @@ public class UserInfo {
         this.roomCode=RoomCode;
         this.usersRooms=UsersRooms;
         this.userLikes=userLikes;
+        this.allowWrite=AllowWrite;
     }
 
     public TheQOfUser getQnum1() {
@@ -171,5 +174,13 @@ public class UserInfo {
 
     public void setUserLikes(UserLikes userLikes) {
         this.userLikes = userLikes;
+    }
+
+    public String getAllowWrite() {
+        return allowWrite;
+    }
+
+    public void setAllowWrite(String allowWrite) {
+        this.allowWrite = allowWrite;
     }
 }

@@ -46,7 +46,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
     private String A4="";private String A5="";
     private String OtherUserCash = "";private String OtherUserLocation;
     private ReportsTime ControllerReportsTime;
-    private String UserOwnRoom;
+    private String UserOwnRoom;private String UserAllowWrite;
 
 
 
@@ -71,6 +71,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
 
         myRef = database.getReference("Users").child(UserId);
         getValueOfUser(myRef);
+        DisAllowToWrite();
 
 
         Reload.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +136,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
         SendA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                 String UserAns = TheAnswerOfQ.getText().toString();
                 if(UserAns=="null"||!EmptyFromForbiddenLanguage(UserAns)||UserAns.isEmpty()){
 
@@ -202,6 +204,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                 nextBtn.performClick();
                 nextBtn.performClick();
                 SendA.setEnabled(false);
+                DisAllowToWrite();
             }
         });
 
@@ -237,6 +240,7 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
                     changeActivityIfBanned();
                 }
                 UserOwnRoom = userInfo.getRoomCode();
+                UserAllowWrite = userInfo.getAllowWrite();
 
             }
 
@@ -414,6 +418,18 @@ public class AnswerQPrivateRoom extends AppCompatActivity {
         SendA.setEnabled(false);
         Reload.setEnabled(true);
     }
+
+    public void AllowToWrite(){
+        UserAllowWrite = "true";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
+    }
+    public void DisAllowToWrite(){
+        UserAllowWrite = "false";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
+    }
+
 
 }
 

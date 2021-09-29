@@ -3,3 +3,28 @@ Toast.makeText(MainActivity2.this, "You Already Sent 5 Q", Toast.LENGTH_SHORT).s
 
 
 
+{
+  "rules":  {
+
+    ".read": "auth !=null",
+    ".write":"root.child('Users').child(auth.uid).child('allowWrite').val() === 'true' || root.child('Users').child(auth.uid).val() === null",
+   	"Users":{
+      "$uid":{
+        "allowWrite":{
+          ".write": "auth !=null"
+        }
+      }
+    }
+  }
+}
+
+
+{
+  "rules":  {
+
+    ".read": "auth !=null",
+    ".write":"auth !=null",
+
+  }
+}
+

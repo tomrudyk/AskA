@@ -223,7 +223,7 @@ public class CreateUserPage extends AppCompatActivity {
         ReportsTime reportsTime = new ReportsTime("0","0","0","0");
         UserLikes userLikes = new UserLikes("0","0");
         UserInfo userInfo = new UserInfo(TheQ,TheQ,TheQ,TheQ,TheQ,"5",UserCountry
-                ,"0","0",UserHobby,UserHobby2,UserHobby3,UserProfession,reportsTime,"0","0",userLikes);
+                ,"0","0",UserHobby,UserHobby2,UserHobby3,UserProfession,reportsTime,"0","0",userLikes,"false");
         myRef = database.getReference("Users").child(nickname);
         myRef.setValue(userInfo);
 

@@ -2,6 +2,8 @@ package com.example.aska;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +45,8 @@ public class PrivateRoom extends AppCompatActivity {
     private String RoomsString;
     private String RoomToAsk;
     private String UserCash;
+    private String UserAllowWrite;
+    private boolean FirstClickCreate=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,34 +63,54 @@ public class PrivateRoom extends AppCompatActivity {
         getValueOfRoomsCodeString(myRef);
         myRef = database.getReference("Users").child(UserId);
         getValueOfUser(myRef);
+        DisAllowToWrite();
 
         CreateRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myRef = database.getReference("Users").child(UserId);
-                getValueOfUser(myRef);
-                if(CheckForCashPrivateRoom(UserCash)) {
-                    String newCode = RandomRoomCode();
-                    if (!(UserRoomCode == null)) {
-                        myRef = database.getReference("Rooms").child(String.valueOf(UserRoomCode));
-                        myRef.setValue(null);
-                        myRef = database.getReference("Rooms").child(String.valueOf(newCode)).child("QuestionCount");
-                        myRef.setValue("0");
-                        myRef = database.getReference("Users").child(UserId).child("roomCode");
-                        myRef.setValue(newCode);
-                        Toast.makeText(PrivateRoom.this, "Room Created Successfully", Toast.LENGTH_SHORT).show();
-                        int c = Integer.parseInt(UserCash);
-                        int c2 = c - 5;
-                        myRef = database.getReference("Users").child(UserId).child("cash");
-                        myRef.setValue(String.valueOf(c2));
-                    }
-                }
+                    new AlertDialog.Builder(PrivateRoom.this)
+                            .setTitle("Create Room")
+                            .setMessage("Are you sure you want to create a new room?")
+
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    AllowToWrite();
+                                    myRef = database.getReference("Users").child(UserId);
+                                    getValueOfUser(myRef);
+                                    if (CheckForCashPrivateRoom(UserCash)) {
+                                        String newCode = RandomRoomCode();
+                                        if (!(UserRoomCode == null)) {
+                                            myRef = database.getReference("Rooms").child(String.valueOf(UserRoomCode));
+                                            myRef.setValue(null);
+                                            myRef = database.getReference("Rooms").child(String.valueOf(newCode)).child("QuestionCount");
+                                            myRef.setValue("0");
+                                            myRef = database.getReference("Users").child(UserId).child("roomCode");
+                                            myRef.setValue(newCode);
+                                            Toast.makeText(PrivateRoom.this, "Room Created Successfully", Toast.LENGTH_SHORT).show();
+                                            int c = Integer.parseInt(UserCash);
+                                            int c2 = c - 5;
+                                            myRef = database.getReference("Users").child(UserId).child("cash");
+                                            myRef.setValue(String.valueOf(c2));
+                                            DisAllowToWrite();
+                                        }
+
+                                    }
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    DisAllowToWrite();
+                                }
+                            })
+                            .show();
             }
         });
 
         JoinRoomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                 String RoomCodeToJoin = JoinRoomCode.getText().toString();
                 myRef = database.getReference("Users").child(UserId);
                 getValueOfUser(myRef);
@@ -103,6 +127,7 @@ public class PrivateRoom extends AppCompatActivity {
                 else{
                     Toast.makeText(PrivateRoom.this, "Code is Empty", Toast.LENGTH_SHORT).show();
                 }
+                DisAllowToWrite();
             }
         });
 
@@ -168,6 +193,7 @@ public class PrivateRoom extends AppCompatActivity {
                     }
                     UsersRoomsJoined = userInfo.getUsersRooms();
                     UserCash=userInfo.getCash();
+                    UserAllowWrite=userInfo.getAllowWrite();
 
                 }
 
@@ -293,6 +319,17 @@ public class PrivateRoom extends AppCompatActivity {
                 return true;
             }
         }
+    }
+
+    public void AllowToWrite(){
+        UserAllowWrite = "true";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
+    }
+    public void DisAllowToWrite(){
+        UserAllowWrite = "false";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
     }
 
 

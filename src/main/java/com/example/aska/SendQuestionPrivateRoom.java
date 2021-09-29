@@ -55,10 +55,13 @@ public class SendQuestionPrivateRoom extends AppCompatActivity {
     private String Q4 = "";
     private String Q5 = "";
     private String StringCash;
+    private String UserAllowWrite;
+
 
 
     private ReportsTime ControllerReportsTime;
     private String UsersRoomsJoined;
+
 
 
     @Override
@@ -74,16 +77,19 @@ public class SendQuestionPrivateRoom extends AppCompatActivity {
         TextView RoomCode = findViewById(R.id.RoomCode);
 
         QuestionEditor("0", "0", UserId); /// The First Q is Always not working - that way it will not work and user won't notice
+        DisAllowToWrite();
 
 
         SendQ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AllowToWrite();
                 if (EmptyFromForbiddenLanguage(TheQ.getText().toString().toLowerCase())) {
                     QuestionEditor(TheQ.getText().toString(), "0", UserId);
                     ChildrenCount = 0;
                     TheQ.setText("");
                 }
+                DisAllowToWrite();
 
             }
 
@@ -235,6 +241,7 @@ public class SendQuestionPrivateRoom extends AppCompatActivity {
                         changeActivityIfBanned();
                     }
                     UsersRoomsJoined = userInfo.getUsersRooms();
+                    UserAllowWrite = userInfo.getAllowWrite();
                 }
 
             }
@@ -301,6 +308,17 @@ public class SendQuestionPrivateRoom extends AppCompatActivity {
     public void changeActivityIfBanned() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void AllowToWrite(){
+        UserAllowWrite = "true";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
+    }
+    public void DisAllowToWrite(){
+        UserAllowWrite = "false";
+        myRef = database.getReference("Users").child(UserId).child("allowWrite");
+        myRef.setValue(UserAllowWrite);
     }
 
 
